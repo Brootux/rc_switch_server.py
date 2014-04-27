@@ -1,0 +1,47 @@
+#!/bin/sh
+# Start/stop the rc_switch_server daemon.
+#
+### BEGIN INIT INFO
+# Provides:          rc_switch_server
+# Required-Start:    $remote_fs $syslog $time $network
+# Required-Stop:     $remote_fs $syslog $time $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: server deamon for controlling rc-switches
+### END INIT INFO
+
+PIDFILE=/tmp/rc_switch_server.pid
+
+case "$1" in
+    start)
+        # try to start deamon
+        start-stop-daemon --start --exec /usr/local/rc_switch_server/server.py & >> /dev/null
+        
+        # check if deamon was successfuly started
+        if [ $? -eq 0 ]
+        then
+            echo "RC-Switch-Server successfuly started!"
+        else
+            echo "ERROR: RC-Switch-Server was NOT started!"
+        fi
+	;;
+    stop)
+        # try to stop deamon
+        start-stop-daemon --stop --pidfile $PIDFILE >> /dev/null
+        
+        # check if deamon was successfuly stopped
+        if [ $? -eq 0 ]
+        then
+            rm -rf $PIDFILE
+            echo "RC-Switch-Server successfuly stopped!"
+        else
+            echo "ERROR: RC-Switch-Server was NOT stopped!"
+        fi
+        ;;
+    restart) 
+        $0 stop
+        $0 start
+        ;;
+esac
+
+exit 0
