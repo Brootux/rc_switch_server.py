@@ -26,6 +26,7 @@ If you connect the Transmitter to another pin, you can later change the pin in s
 
 * Clone this git-repository
   * `git clone https://github.com/Brootux/rc_switch_server.py.git`
+  * change into the new directory `cd rc_switch_server.py`
 * run the installRCS.sh bash-script (as root or with sudo)
   * `./installRCS.sh`
   * maybe you have to run `sudo chmod 755 installRCS.sh` first!
