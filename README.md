@@ -74,11 +74,13 @@ Any Client, that wants to control a rc-switch has to send a string in the follow
 
 `[system_code];[unit_code];[on/off]`
 
-The system_code has to be five numbers with dots between them. On/Off means 1/0.
-
-Examples:
+The system_code has to be five numbers with dots between them. On/Off means 1/0, examples:
   * `"0.1.0.0.0;1;1"` (switch A of system-code 01000 on)
   * `"0.1.0.0.0;1;0"` (switch A of system-code 01000 off)
+
+You can turn on/off more than one switch by sending multiple lines, examples:
+  * `"0.1.0.0.0;1;1\n0.1.0.0.0;2;1"` (switch A and B of system-code 01000 on)
+  * `"0.1.0.0.0;1;1\n0.1.0.0.0;2;0"` (switch A of system-code 01000 on and B of system-code 01000 off)
 
 Hints:
   * There is a example implementation for a client in `/usr/local/rc_switch_server/rc_switch_client_simulator.py` wich takes 1 argument (on/off) and connects to server running on local host. The default system_code and unit_code are 00001 and 1!
